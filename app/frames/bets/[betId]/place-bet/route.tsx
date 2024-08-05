@@ -57,7 +57,7 @@ const handleRequest = frames(async (ctx) => {
       buttons.push(
         <Button
           action="tx"
-          target={`/approve-tx?amount=${amount}`}
+          target={`/approve-tx?amount=${formatUnits(BigInt(amount), 6)}`}
           post_url={`/bets/${betId}`}
         >
           {`Approve ${amount} USDC`}

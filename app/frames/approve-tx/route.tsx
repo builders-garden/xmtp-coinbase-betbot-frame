@@ -1,4 +1,10 @@
-import { Abi, createPublicClient, encodeFunctionData, http } from "viem";
+import {
+  Abi,
+  createPublicClient,
+  encodeFunctionData,
+  http,
+  parseUnits,
+} from "viem";
 import { frames } from "../frames";
 import { transaction } from "frames.js/core";
 import { base } from "viem/chains";
@@ -24,14 +30,14 @@ export const POST = frames(async (ctx) => {
     transport: http(),
   });
 
-  // const parsedAmount = BigInt(parseUnits(amount as string, 6));
+  const parsedAmount = BigInt(parseUnits(amount as string, 6));
 
   const calldata = encodeFunctionData({
     abi: ERC20_ABI,
     functionName: "approve",
     args: [
       process.env.BETBOT_CONTRACT_ADDRESS as `0x${string}`,
-      BigInt(amount),
+      parsedAmount,
     ] as const,
   });
 
