@@ -24,12 +24,14 @@ const handleRequest = frames(async (ctx) => {
   const amount = amounts[0];
   const user = await ctx.walletAddress();
 
+  console.log(bet.endTime, Date.now() / 1000);
+
   const buttons = [];
   if (bet.admin.toLowerCase() === user?.toLowerCase()) {
     if (Number(bet.endTime) > Date.now() / 1000) {
       buttons.push(
         <Button action="post" target={`/bets/${betId}`}>
-          ⬅️ Bet is still active (go back)
+          ⬅️ Bet window still open (go back)
         </Button>
       );
     } else {
@@ -57,6 +59,12 @@ const handleRequest = frames(async (ctx) => {
         </Button>
       );
     }
+  } else {
+    buttons.push(
+      <Button action="post" target={`/bets/${betId}`}>
+        ⬅️ Go back
+      </Button>
+    );
   }
 
   return {
