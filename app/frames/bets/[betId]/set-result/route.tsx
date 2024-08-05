@@ -26,30 +26,38 @@ const handleRequest = frames(async (ctx) => {
 
   const buttons = [];
   if (bet.admin.toLowerCase() === user?.toLowerCase()) {
-    buttons.push(
-      <Button
-        action="tx"
-        target={`/set-bet-result-tx?betId=${betId}&outcome=0`}
-        post_url={`/bets/${betId}`}
-      >
-        {`🏆 ${outcomes[0]}`}
-      </Button>
-    );
-    buttons.push(
-      <Button
-        action="tx"
-        target={`/set-bet-result-tx?betId=${betId}&outcome=1`}
-        post_url={`/bets/${betId}`}
-      >
-        {`🏆 ${outcomes[1]}`}
-      </Button>
-    );
+    if (Number(bet.endTime) > Date.now() / 1000) {
+      buttons.push(
+        <Button action="post" target={`/bets/${betId}`}>
+          ⬅️ Bet is still active (go back)
+        </Button>
+      );
+    } else {
+      buttons.push(
+        <Button
+          action="tx"
+          target={`/set-bet-result-tx?betId=${betId}&outcome=0`}
+          post_url={`/bets/${betId}`}
+        >
+          {`🏆 ${outcomes[0]}`}
+        </Button>
+      );
+      buttons.push(
+        <Button
+          action="tx"
+          target={`/set-bet-result-tx?betId=${betId}&outcome=1`}
+          post_url={`/bets/${betId}`}
+        >
+          {`🏆 ${outcomes[1]}`}
+        </Button>
+      );
+      buttons.push(
+        <Button action="post" target={`/bets/${betId}`}>
+          ⬅️ Go back
+        </Button>
+      );
+    }
   }
-  buttons.push(
-    <Button action="post" target={`/bets/${betId}`}>
-      ⬅️ Go back
-    </Button>
-  );
 
   return {
     image: (
