@@ -31,8 +31,8 @@ export const POST = frames(async (ctx) => {
       BigInt(
         parseInt((Date.now() / 1000).toString()) + parseInt(duration as string)
       ),
-      // BigInt(outcome as string),
-      BigInt(0),
+      BigInt(outcome as string),
+      // BigInt(0),
     ] as const,
   });
 
