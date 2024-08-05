@@ -1,10 +1,4 @@
-import {
-  Abi,
-  createPublicClient,
-  encodeFunctionData,
-  http,
-  parseUnits,
-} from "viem";
+import { Abi, createPublicClient, encodeFunctionData, http } from "viem";
 import { frames } from "../frames";
 import { transaction } from "frames.js/core";
 import { base } from "viem/chains";
@@ -19,6 +13,10 @@ export const POST = frames(async (ctx) => {
     throw new Error("Invalid frame message");
   }
 
+  if (!amount) {
+    throw new Error("Invalid parameters");
+  }
+
   const userAddress = await ctx.walletAddress();
 
   const publicClient = createPublicClient({
@@ -26,14 +24,14 @@ export const POST = frames(async (ctx) => {
     transport: http(),
   });
 
-  const parsedAmount = BigInt(parseUnits(amount as string, 6));
+  // const parsedAmount = BigInt(parseUnits(amount as string, 6));
 
   const calldata = encodeFunctionData({
     abi: ERC20_ABI,
     functionName: "approve",
     args: [
       process.env.BETBOT_CONTRACT_ADDRESS as `0x${string}`,
-      parsedAmount,
+      BigInt(amount),
     ] as const,
   });
 
