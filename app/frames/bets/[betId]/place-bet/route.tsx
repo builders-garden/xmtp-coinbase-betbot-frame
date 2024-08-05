@@ -27,7 +27,10 @@ const handleRequest = frames(async (ctx) => {
     address: process.env.USDC_CONTRACT_ADDRESS as `0x${string}`,
     abi: ERC20_ABI,
     functionName: "allowance",
-    args: [bet.admin, process.env.BETBOT_CONTRACT_ADDRESS as `0x${string}`],
+    args: [
+      user as `0x${string}`,
+      process.env.BETBOT_CONTRACT_ADDRESS as `0x${string}`,
+    ],
   });
 
   const playerBet = await publicClient.readContract({
@@ -45,6 +48,8 @@ const handleRequest = frames(async (ctx) => {
   });
 
   const amount = amounts[0];
+
+  console.log(allowance, amount);
 
   const buttons = [];
   if (bet.status === 0 && !playerHasBet) {
