@@ -37,10 +37,17 @@ const handleRequest = frames(async (ctx) => {
     args: [user as `0x${string}`, BigInt(betId)],
   });
 
+  const playerHasBet = await publicClient.readContract({
+    address: process.env.BETBOT_CONTRACT_ADDRESS as `0x${string}`,
+    abi: BETBOT_ABI,
+    functionName: "playerHasBet",
+    args: [user as `0x${string}`, BigInt(betId)],
+  });
+
   const amount = amounts[0];
 
   const buttons = [];
-  if (bet.status === 0 && playerBet === BigInt(0)) {
+  if (bet.status === 0 && !playerHasBet) {
     if (!allowance || BigInt(allowance) < BigInt(amounts[0])) {
       buttons.push(
         <Button
