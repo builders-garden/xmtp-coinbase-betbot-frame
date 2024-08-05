@@ -2,7 +2,7 @@ import { createPublicClient, decodeEventLog, formatUnits, http } from "viem";
 import { frames } from "../../frames";
 import { base } from "viem/chains";
 import { BETBOT_ABI } from "@/app/abi";
-import { parseAddress } from "@/app/utils";
+import { parseAddress, vercelURL } from "@/app/utils";
 
 const handleRequest = frames(async (ctx) => {
   const txHash = ctx.message?.transactionId;
@@ -49,7 +49,7 @@ const handleRequest = frames(async (ctx) => {
     image: (
       <div tw="flex flex-col w-[100%] h-[100%]">
         <img
-          src="http://localhost:3000/images/frame_base.png"
+          src={`${vercelURL()}/images/frame_base.png`}
           width={"100%"}
           height={"100%"}
           tw="relative"
