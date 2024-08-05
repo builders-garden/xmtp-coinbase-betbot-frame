@@ -60,8 +60,8 @@ const handleRequest = frames(async (ctx) => {
       buttons.push(
         <Button
           action="tx"
-          target={`/place-bet-tx?betId=${betId}&outcome=1`}
-          post_url={`/place-bet-tx/success?betId=${betId}&outcome=1`}
+          target={`/place-bet-tx?betId=${betId}&outcome=0`}
+          post_url={`/place-bet-tx/success?betId=${betId}&outcome=0`}
         >
           {`🔵 ${outcomes[0]}`}
         </Button>
@@ -69,8 +69,8 @@ const handleRequest = frames(async (ctx) => {
       buttons.push(
         <Button
           action="tx"
-          target={`/place-bet-tx?betId=${betId}&outcome=2`}
-          post_url={`/place-bet-tx/success?betId=${betId}&outcome=2`}
+          target={`/place-bet-tx?betId=${betId}&outcome=1`}
+          post_url={`/place-bet-tx/success?betId=${betId}&outcome=1`}
         >
           {`🔴 ${outcomes[1]}`}
         </Button>
@@ -127,7 +127,7 @@ const handleRequest = frames(async (ctx) => {
                 </div>
                 <div tw="absolute top-[342px] flex">
                   <div tw="absolute left-[50px] flex">
-                    {bet.outcomeIndex === BigInt(1) ? (
+                    {bet.outcomeIndex === BigInt(0) ? (
                       <div tw="mx-auto top-[300px] w-[500px] flex items-center justify-center text-center text-[56px]">
                         {outcomes[0]}
                       </div>
@@ -138,7 +138,7 @@ const handleRequest = frames(async (ctx) => {
                     )}
                   </div>
                   <div tw="absolute left-[600px] flex">
-                    {bet.outcomeIndex === BigInt(2) ? (
+                    {bet.outcomeIndex === BigInt(1) ? (
                       <div tw="mx-auto top-[300px] w-[500px] flex items-center justify-center text-center text-[56px]">
                         {outcomes[1]}
                       </div>
@@ -207,7 +207,7 @@ const handleRequest = frames(async (ctx) => {
                 </div>
                 <div tw="absolute top-[342px] flex">
                   <div tw="absolute left-[50px] flex">
-                    {playerBet === BigInt(1) ? (
+                    {playerBet === BigInt(0) ? (
                       <div tw="mx-auto top-[300px] w-[500px] flex items-center justify-center text-center text-[56px]">
                         {outcomes[0]}
                       </div>
@@ -218,7 +218,7 @@ const handleRequest = frames(async (ctx) => {
                     )}
                   </div>
                   <div tw="absolute left-[600px] flex">
-                    {playerBet === BigInt(2) ? (
+                    {playerBet === BigInt(1) ? (
                       <div tw="mx-auto top-[300px] w-[500px] flex items-center justify-center text-center text-[56px]">
                         {outcomes[1]}
                       </div>

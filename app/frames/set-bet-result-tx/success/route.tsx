@@ -73,7 +73,7 @@ const handleRequest = frames(async (ctx) => {
               </div>
               <div tw="absolute top-[342px] flex">
                 <div tw="absolute left-[50px] flex">
-                  {outcome === "1" ? (
+                  {outcome === "0" ? (
                     <div tw="mx-auto top-[300px] w-[500px] flex items-center justify-center text-center text-[56px]">
                       {outcomes[0]}
                     </div>
@@ -84,7 +84,7 @@ const handleRequest = frames(async (ctx) => {
                   )}
                 </div>
                 <div tw="absolute left-[600px] flex">
-                  {outcome === "2" ? (
+                  {outcome === "1" ? (
                     <div tw="mx-auto top-[300px] w-[500px] flex items-center justify-center text-center text-[56px]">
                       {outcomes[1]}
                     </div>

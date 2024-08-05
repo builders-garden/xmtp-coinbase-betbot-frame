@@ -29,7 +29,7 @@ const handleRequest = frames(async (ctx) => {
     buttons.push(
       <Button
         action="tx"
-        target={`/set-bet-result-tx?betId=${betId}&outcome=1`}
+        target={`/set-bet-result-tx?betId=${betId}&outcome=0`}
         post_url={`/bets/${betId}`}
       >
         {`🏆 ${outcomes[0]}`}
@@ -38,7 +38,7 @@ const handleRequest = frames(async (ctx) => {
     buttons.push(
       <Button
         action="tx"
-        target={`/set-bet-result-tx?betId=${betId}&outcome=2`}
+        target={`/set-bet-result-tx?betId=${betId}&outcome=1`}
         post_url={`/bets/${betId}`}
       >
         {`🏆 ${outcomes[1]}`}
