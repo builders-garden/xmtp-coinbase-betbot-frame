@@ -33,5 +33,6 @@ export const POST = frames(async (ctx) => {
       data: calldata,
       value: "0",
     },
+    attribution: false,
   });
 });
