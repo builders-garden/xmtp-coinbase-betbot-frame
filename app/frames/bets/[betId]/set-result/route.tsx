@@ -6,7 +6,6 @@ import { parseAddress, vercelURL } from "@/app/utils";
 import { Button } from "frames.js/next";
 
 const handleRequest = frames(async (ctx) => {
-  // get path params
   const url = new URL(ctx.request.url);
   const betId = url.pathname.split("/")[3];
 
