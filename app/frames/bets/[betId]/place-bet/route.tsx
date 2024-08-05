@@ -61,7 +61,7 @@ const handleRequest = frames(async (ctx) => {
         <Button
           action="tx"
           target={`/place-bet-tx?betId=${betId}&outcome=1`}
-          post_url={`/place-bet-tx/success?betId=${betId}&outcome=2`}
+          post_url={`/place-bet-tx/success?betId=${betId}&outcome=1`}
         >
           {`🔵 ${outcomes[0]}`}
         </Button>
