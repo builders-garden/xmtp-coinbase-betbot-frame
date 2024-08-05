@@ -16,7 +16,9 @@ const handleRequest = frames(async (ctx) => {
     transport: http(),
   });
 
-  const receipt = await publicClient.getTransactionReceipt({ hash: txHash });
+  const receipt = await publicClient.waitForTransactionReceipt({
+    hash: txHash,
+  });
 
   const betCreatedEvent = receipt?.logs
     .map((log) => {
