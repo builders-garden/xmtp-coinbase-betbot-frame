@@ -33,7 +33,7 @@ const handleRequest = frames(async (ctx) => {
     headers: {
       "Cache-Control": "public, immutable, no-transform, max-age=0",
     },
-    buttons: [],
+    buttons,
   };
 });
 
