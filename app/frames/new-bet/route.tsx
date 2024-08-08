@@ -27,7 +27,7 @@ const handleRequest = frames(async (ctx) => {
     };
   }
   const redis = getRedisClient();
-  const betData = await redis.get<string>(`bet:${id}`);
+  const betData = await redis.get<string>(`${id}`);
 
   if (!betData) {
     return {
