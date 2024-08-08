@@ -4,18 +4,15 @@ import { parseAddress, vercelURL } from "@/app/utils";
 import { createPublicClient, http, parseUnits } from "viem";
 import { base } from "viem/chains";
 import { ERC20_ABI } from "@/app/abi";
+import { getRedisClient } from "@/lib/redis";
 
 const handleRequest = frames(async (ctx) => {
   const url = new URL(ctx.request.url);
   const queryParams = new URLSearchParams(url.search);
   // console.log(queryParams);
-  const description = queryParams.get("description");
-  const amount = queryParams.get("amount");
-  const options = queryParams.get("options");
-  const admin = queryParams.get("admin");
-  const duration = queryParams.get("duration");
+  const id = queryParams.get("id");
 
-  if (!description || !amount || !options || !admin || !duration) {
+  if (!id) {
     return {
       image: (
         <div
@@ -24,11 +21,30 @@ const handleRequest = frames(async (ctx) => {
             flexDirection: "column",
           }}
         >
-          Invalid parameters.
+          Missing id parameter.
         </div>
       ),
     };
   }
+  const redis = getRedisClient();
+  const betData = await redis.get<string>(`bet:${id}`);
+
+  if (!betData) {
+    return {
+      image: (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          Invalid new bet id.
+        </div>
+      ),
+    };
+  }
+
+  const { description, amount, options, admin, duration } = JSON.parse(betData);
 
   const betOptions = options?.split(",");
 
