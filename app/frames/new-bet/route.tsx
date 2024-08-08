@@ -27,7 +27,7 @@ const handleRequest = frames(async (ctx) => {
     };
   }
   const redis = getRedisClient();
-  const betData = await redis.get<string>(`${id}`);
+  const betData = await redis.get<any>(id);
 
   if (!betData) {
     return {
@@ -44,8 +44,7 @@ const handleRequest = frames(async (ctx) => {
     };
   }
 
-  const { description, amount, options, admin, duration } = JSON.parse(betData);
-
+  const { description, amount, options, admin, duration } = betData;
   const betOptions = options?.split(",");
 
   const publicClient = createPublicClient({
