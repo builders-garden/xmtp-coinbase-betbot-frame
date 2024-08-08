@@ -1,10 +1,4 @@
-import {
-  Abi,
-  createPublicClient,
-  encodeFunctionData,
-  http,
-  parseUnits,
-} from "viem";
+import { Abi, encodeFunctionData, parseUnits } from "viem";
 import { frames } from "../frames";
 import { transaction } from "frames.js/core";
 import { base } from "viem/chains";
@@ -22,13 +16,6 @@ export const POST = frames(async (ctx) => {
   if (!amount) {
     throw new Error("Invalid parameters");
   }
-
-  const userAddress = await ctx.walletAddress();
-
-  const publicClient = createPublicClient({
-    chain: base,
-    transport: http(),
-  });
 
   const parsedAmount = BigInt(parseUnits(amount as string, 6));
 
